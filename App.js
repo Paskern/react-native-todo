@@ -23,6 +23,10 @@ export default class App extends React.Component {
     this.setState({ addTodoVisible: !this.state.addTodoVisible });
   }
 
+  renderList = (list) => {
+    return <TodoList list={list} />;
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -54,13 +58,13 @@ export default class App extends React.Component {
           <Text style={styles.add}>Add List</Text>
         </View>
 
-        <View style={{ height: 275, paddingLeft: 32 }}>
+        <View style={{ height: 275 }}>
           <FlatList
             data={tempData}
             keyExtractor={(item) => item.name}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => <TodoList list={item} />}
+            renderItem={({ item }) => this.renderList(item)}
           />
         </View>
       </View>
